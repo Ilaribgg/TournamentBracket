@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Add a game to the Tournament list</title>
+    
+</head>
+<style>
+	table {
+  	font-family: arial, sans-serif;
+ 	border-collapse: collapse;
+  	width: 100%;
+	}
+
+	td, th {
+	border: 1px solid #dddddd;
+  	text-align: left;
+  	padding: 8px;
+	}
+
+	tr:nth-child(even) {
+  	background-color: #dddddd;
+	}
+</style>
+<body>
+	<h1>Game</h1>
+	<form action="#" th:action="@{/newgame}"  th:object= ${game} method="post">
+	<p>Gamename: <input type="text" th:field="${game.gamename}" /></p>
+	<p>Year released: <input type="text" th:field="${game.year}" /></p>
+	
+	
+			  	<label for="list">Genre</label>
+			 <select id="list" th:field="*{genre}" class="form-control" Style="width: 300px">
+       			<option th:each="genre: ${genres}" th:value="${genre.genreid}" th:text="${genre.genrename}" ></option>
+    		</select>
+	<input type="submit" value="Add a game" class="btn btn-success"/> <input type="reset" value="Reset" />
+	</form>
+    
+</body>
+</html>

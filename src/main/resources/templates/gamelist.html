@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Tournament</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" /> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $("a").hide();
+  });
+  $("#show").click(function(){
+    $("a").show();
+  });
+});
+</script>
+     
+</head>
+<style>
+	table {
+  	font-family: arial, sans-serif;
+ 	border-collapse: collapse;
+  	width: 100%;
+	}
+
+	td, th {
+	border: 1px solid #dddddd;
+  	text-align: left;
+  	padding: 8px;
+	}
+
+	tr:nth-child(even) {
+  	background-color: #dddddd;
+	}
+</style>
+<body>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	<h1>Tournament games</h1>
+	<table>
+		<tr>
+		<th>Id</th>
+		<th>Game</th>
+		<th>Year</th>
+		<th>Genre</th>
+		</tr>
+		
+		
+		
+		<tr th:each="game : ${games}">
+			<td th:text="${game.id}">id</td>
+			<td th:text="${game.gamename}">gamename</td>
+			<td th:text="${game.year}">year</td>
+			<td th:text="${game.genre.genrename}">genre</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${game.id})}">Edit</a></td>
+			</tr>
+		</table>
+		<a  sec:authorize="hasAuthority('ADMIN')" href="/newgame">New Game</a>
+		
+		
+	<div>
+
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			
+		</form>
+		</div>
+
+<button sec:authorize="hasAuthority('ADMIN')" id="hide">Hide</button>
+<button sec:authorize="hasAuthority('ADMIN')" id="show">Show</button>
+</body>
+</html>
