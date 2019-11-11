@@ -1,8 +1,5 @@
 package hhswd.harjoitustyo.domain;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +23,6 @@ private String maingame;
 @JsonIgnore
 @JoinColumn(name = "id")
 private Game game;
-
-
 public Player() {
 	super();
 	this.playerid = null;

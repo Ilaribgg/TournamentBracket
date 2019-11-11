@@ -42,12 +42,13 @@
 </body>
 <table>
 <tr>
-	<th>Game name</th>
-	<th>Playerlist</th>
+
+	<th>Player list</th>
 	<th>Main character</th>
+
 	</tr>
+	
 	<tr th:each="player : ${players}">
-	<td th:text="${game.gamename}"></td>
 	<td th:text="${player.playername}">playername</td>
 	<td th:text="${player.maingame}">main</td>
 	</tr>

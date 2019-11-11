@@ -111,24 +111,30 @@ public class PlayerController {
 	public @ResponseBody User saveUserRest(@RequestBody User user) {
 		return uRepository.save(user);
 	}
-
+	@RequestMapping(value= "/playerlist", method = RequestMethod.GET)
+	public String getPlayers(Model model){
+		List<Player> players = (List<Player>) playerRepository.findAll();
+		model.addAttribute("players", players);
+		List<Game> games = (List<Game>) gameRepository.findAll();
+		model.addAttribute("games", games);
+		return "newplayer";
 		
-
+}
 	@RequestMapping(value = "/newplayer", method = RequestMethod.POST)
 	public String savePlayer(@ModelAttribute Player player) {
 	playerRepository.save(player);
 		return "redirect:/gamelist";
 	}
-	@RequestMapping(value = "/newplayer/{id}", method = RequestMethod.GET)
-	public String getNewPlayerForm(@PathVariable("id")Long id, Model model) {
+	@RequestMapping(value = "/newplayer", method = RequestMethod.GET)
+	public String getNewPlayerForm(Model model) {
 		model.addAttribute("player", new Player());
 		List<Player> players = (List<Player>) playerRepository.findAll();
 		model.addAttribute("players", players);
-		model.addAttribute("games", gameRepository.findAll());
-		
+		List<Game> games = (List<Game>) gameRepository.findAll();
+		model.addAttribute("games", games);
 		return "newplayer";
+	}
 	
 
-	}
 }
 

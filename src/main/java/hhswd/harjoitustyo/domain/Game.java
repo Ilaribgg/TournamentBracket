@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
+
+
 @Entity
 public class Game {
 	
