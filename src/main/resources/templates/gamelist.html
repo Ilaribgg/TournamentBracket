@@ -58,7 +58,7 @@ $(document).ready(function(){
 			</tr>
 		</table>
 		<a  sec:authorize="hasAuthority('ADMIN')" href="/newgame" class="btn btn-warning">New Game</a>
-		<a href="/newplayer" class="btn btn-warning">Join a tournament</a>
+		<a sec:authorize="isAuthenticated()" href="/newplayer" class="btn btn-warning">Join a tournament</a>
 		
 	<div>
 

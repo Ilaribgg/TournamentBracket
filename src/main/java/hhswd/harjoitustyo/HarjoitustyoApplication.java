@@ -42,7 +42,7 @@ return (args) -> {
 	gameRepository.save(new Game("Tekken 7", 2013, gRepository.findByGenrename("Fighter").get(0)));
 	gameRepository.save(new Game("Guilty Gear XX Midnight Carnival Rev 2", 2000, gRepository.findByGenrename("Fighter").get(0)));
 	
-	playerRepository.save(new Player("Jami", "Vegeta", gameRepository.findByGamename("Dragonball FighterZ").get(0)));
+	
 	
 	User user1 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN", "moi@gmail.com");
 	uRepository.save(user1);
