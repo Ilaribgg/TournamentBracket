@@ -21,7 +21,7 @@ $(document).ready(function(){
 	table {
   	font-family: arial, sans-serif;
  	border-collapse: collapse;
-  	width: 100%;
+  	width: 70%;
 	}
 
 	td, th {
@@ -53,10 +53,11 @@ $(document).ready(function(){
 			<td th:text="${game.year}">year</td>
 			<td th:text="${game.genre.genrename}">genre</td>
 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletegame/{id}(id=${game.id})}" class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${game.id})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${game.id})}" class="btn btn-warning">Edit</a></td>
+			<td><a th:href="@{/newplayer/{id}(id=${game.id})}">Join a tournament</a></td>
 			</tr>
 		</table>
-		<a  sec:authorize="hasAuthority('ADMIN')" href="/newgame">New Game</a>
+		<a  sec:authorize="hasAuthority('ADMIN, USER')" href="/newgame">New Game</a>
 		
 		
 	<div>

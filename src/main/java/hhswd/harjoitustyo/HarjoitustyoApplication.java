@@ -14,6 +14,8 @@ import hhswd.harjoitustyo.domain.Genre;
 import hhswd.harjoitustyo.domain.GenreRepository;
 import hhswd.harjoitustyo.domain.UserRepository;
 import hhswd.harjoitustyo.domain.User;
+import hhswd.harjoitustyo.domain.PlayerRepository;
+import hhswd.harjoitustyo.domain.Player;
 
 @SpringBootApplication
 public class HarjoitustyoApplication {
@@ -25,17 +27,22 @@ public class HarjoitustyoApplication {
 	}
 
 @Bean
-public CommandLineRunner gameDemo(GameRepository gameRepository, UserRepository uRepository, GenreRepository gRepository) {
+public CommandLineRunner gameDemo(GameRepository gameRepository, UserRepository uRepository, GenreRepository gRepository, PlayerRepository playerRepository) {
 return (args) -> {
 	log.info("Save a couple of games");
 	
 	gRepository.save(new Genre("Fighter"));
 	gRepository.save(new Genre("FPS"));
+	gRepository.save(new Genre("Sports"));
+	gRepository.save(new Genre("Platformer"));
+	gRepository.save(new Genre("Speedrunning"));
+	gRepository.save(new Genre("MOBA"));
 	
 	gameRepository.save(new Game( "Dragonball FighterZ", 2017, gRepository.findByGenrename("Fighter").get(0)));
 	gameRepository.save(new Game("Tekken 7", 2013, gRepository.findByGenrename("Fighter").get(0)));
+	gameRepository.save(new Game("Guilty Gear XX Midnight Carnival Rev 2", 2000, gRepository.findByGenrename("Fighter").get(0)));
 	
-	
+	playerRepository.save(new Player("Jami", "Hehexd", gameRepository.findByGamename("Dragonball FighterZ").get(0)));
 	
 	User user1 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN", "moi@gmail.com");
 	uRepository.save(user1);

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Join a tournament</title>
+    
+</head>
+<style>
+	table {
+  	font-family: arial, sans-serif;
+ 	border-collapse: collapse;
+  	width: 100%;
+	}
+
+	td, th {
+	border: 1px solid #dddddd;
+  	text-align: left;
+  	padding: 8px;
+	}
+
+	tr:nth-child(even) {
+  	background-color: #dddddd;
+	}
+</style>
+<body>
+	<h1>Game</h1>
+	<form action="#" th:action="@{/newplayer}"  th:object= ${player} method="post">
+	<label for="list">Game</label>
+			 <select id="list" th:field="*{game}" class="form-control" Style="width: 300px">
+       			<option th:each="game: ${games}" th:value="${game.id}" th:text="${game.gamename}" ></option>
+    		</select>
+	<p>Player name: <input type="text" th:field="${player.playername}" /></p>
+	<p>Main character: <input type="text" th:field="${player.maingame}" /></p>
+	
+	
+
+	<input type="submit" value="Join the tournament" class="btn btn-success"/>
+	</form>
+
+    
+</body>
+<table>
+<tr>
+	<th>Game name</th>
+	<th>Playerlist</th>
+	<th>Main character</th>
+	</tr>
+	<tr th:each="player : ${players}">
+	<td th:text="${game.gamename}"></td>
+	<td th:text="${player.playername}">playername</td>
+	<td th:text="${player.maingame}">main</td>
+	</tr>
+	</table>
+</html>

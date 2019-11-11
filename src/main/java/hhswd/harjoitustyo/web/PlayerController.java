@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import hhswd.harjoitustyo.domain.Game;
 import hhswd.harjoitustyo.domain.GameRepository;
 import hhswd.harjoitustyo.domain.GenreRepository;
+import hhswd.harjoitustyo.domain.Player;
+import hhswd.harjoitustyo.domain.PlayerRepository;
 import hhswd.harjoitustyo.domain.User;
 import hhswd.harjoitustyo.domain.UserRepository;
 
@@ -33,6 +35,9 @@ public class PlayerController {
 	
 	@Autowired
 	UserRepository uRepository;
+	
+	@Autowired
+	PlayerRepository playerRepository;
 	
 	@RequestMapping(value="/login")
 	public String login() {
@@ -96,7 +101,7 @@ public class PlayerController {
 	public String getNewUserForm(Model model) {
 		model.addAttribute("user", new User());
 		return "userform";
-}
+}//Yritetty tehdä uuden käyttäjän luominen//
 	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute User user) {
 		uRepository.save(user);
@@ -105,6 +110,25 @@ public class PlayerController {
 	@RequestMapping(value="/users", method = RequestMethod.POST)
 	public @ResponseBody User saveUserRest(@RequestBody User user) {
 		return uRepository.save(user);
+	}
+
+		
+
+	@RequestMapping(value = "/newplayer", method = RequestMethod.POST)
+	public String savePlayer(@ModelAttribute Player player) {
+	playerRepository.save(player);
+		return "redirect:/gamelist";
+	}
+	@RequestMapping(value = "/newplayer/{id}", method = RequestMethod.GET)
+	public String getNewPlayerForm(@PathVariable("id")Long id, Model model) {
+		model.addAttribute("player", new Player());
+		List<Player> players = (List<Player>) playerRepository.findAll();
+		model.addAttribute("players", players);
+		model.addAttribute("games", gameRepository.findAll());
+		
+		return "newplayer";
+	
+
 	}
 }
 

@@ -48,6 +48,7 @@ public void deleteAllUsers() {
 @Test
 public void createNewGenre() {
 	Genre genre = new Genre("Platformer");
+	genreRepository.save(genre);
 	assertThat(genre.getGenreid()).isNotNull();
 	genreRepository.deleteById((long) 1);
 	
